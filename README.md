@@ -32,11 +32,11 @@ python main.py ejemplos/demo_rpg_completo.rpgc # alcance, lógicos, negativos, E
 Opciones de depuración (opcionales):
 
 ```bash
-python main.py --tokens programa.rpgc   # muestra los tokens y termina
-python main.py --arbol programa.rpgc    # muestra el AST y termina (no ejecuta)
+python main.py --tokens ejemplos/tabla_3.rpgc   # muestra los tokens y termina
+python main.py --arbol ejemplos/tabla_3.rpgc    # muestra el AST y termina
 ```
 
-**Modo interactivo.** Mantiene las variables vivas entre líneas hasta escribir `salir`. Un bloque con llaves puede escribirse en varias líneas (el prompt cambia a `... `):
+**Modo interactivo.** Mantiene las variables vivas entre líneas hasta escribir `salir`. Un bloque con llaves puede escribirse en varias líneas (se visualiza como: `... `):
 
 ```
 > INVENTORY_SLOT INT a = 2;
