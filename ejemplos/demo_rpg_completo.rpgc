@@ -1,0 +1,64 @@
+/*
+   RPG-CORE: demo completo.
+   Muestra: constantes EQUIPPED, HERB_STATUS, negativos unarios,
+   operadores logicos (&&, ||, NO), SINO SI, alcance de bloques y DISCARD.
+*/
+
+// --- Constantes (EQUIPPED): no se pueden reasignar ---
+EQUIPPED INVENTORY_SLOT STRING heroe = "Leon";
+EQUIPPED INVENTORY_SLOT INT hp_max = 100;
+// hp_max = 50;   // <- descomentar da: Error semantico (constante EQUIPPED)
+
+// --- Variables normales y estado de salud (HERB_STATUS) ---
+INVENTORY_SLOT INT hp = hp_max;
+INVENTORY_SLOT HERB_STATUS salud = FINE;
+INVENTORY_SLOT BOOL en_combate = true;
+INVENTORY_SLOT INT turno = 1;
+
+MOSTRAR("Inicia la partida de " + heroe);   // STRING + STRING se concatena
+MOSTRAR(salud);
+
+// --- Negativos unarios ---
+INVENTORY_SLOT INT penalizacion = -10;
+INVENTORY_SLOT INT bono = -(penalizacion * 2);   // -(-20) = 20
+MOSTRAR(bono);
+
+// --- Ciclo con bloques anidados y alcance ---
+CYCLE_TURN (turno <= 5 && en_combate) {
+    INVENTORY_SLOT INT dano = turno * 15;   // 'dano' solo vive dentro de este bloque
+    hp = hp - dano;
+
+    SI hp <= 0 ENTONCES {
+        salud = DEAD;
+        en_combate = false;
+    } SINO SI hp < 30 || dano >= 45 ENTONCES {
+        salud = POISON;
+    }
+
+    MOSTRAR("Turno:");
+    MOSTRAR(turno);
+    MOSTRAR(hp);
+    turno = turno + 1;
+}
+
+// --- NO, &&, || con estados ---
+SI NO en_combate ENTONCES {
+    MOSTRAR("Fin del combate");
+    SI salud == DEAD && NO (hp > 0) ENTONCES {
+        MOSTRAR("GAME OVER");
+    }
+}
+
+// --- Alcance: una variable interna puede 'sombrear' a una externa ---
+INVENTORY_SLOT INT x = 1;
+SI true ENTONCES {
+    INVENTORY_SLOT INT x = 2;
+    MOSTRAR(x);   // 2 (la del bloque)
+}
+MOSTRAR(x);       // 1 (la de afuera sigue intacta)
+// MOSTRAR(dano); // <- descomentar da: Error semantico (no declarada fuera del ciclo)
+
+// --- DISCARD libera una variable ---
+DISCARD(turno);
+// MOSTRAR(turno); // <- descomentar da: Error semantico (ya fue descartada)
+MOSTRAR(salud);

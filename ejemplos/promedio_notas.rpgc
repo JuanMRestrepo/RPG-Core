@@ -1,0 +1,9 @@
+// Promedio de tres notas
+// Salida esperada: 4.0 y luego "aprueba"
+INVENTORY_SLOT FLOAT promedio = (3.0 + 4.0 + 5.0) / 3.0;
+MOSTRAR(promedio);
+SI promedio >= 3.0 ENTONCES {
+    MOSTRAR("aprueba");
+} SINO {
+    MOSTRAR("reprueba");
+}

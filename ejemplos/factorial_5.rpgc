@@ -1,0 +1,9 @@
+// Factorial de 5
+// Salida esperada: 120
+INVENTORY_SLOT INT n = 5;
+INVENTORY_SLOT INT resultado = 1;
+CYCLE_TURN (n > 1) {
+    resultado = resultado * n;
+    n = n - 1;
+}
+MOSTRAR(resultado);

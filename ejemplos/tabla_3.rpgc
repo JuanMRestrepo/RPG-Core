@@ -1,0 +1,7 @@
+// Tabla de multiplicar del 3 con CYCLE_TURN
+// Salida esperada: 3, 6, 9, 12, 15
+INVENTORY_SLOT INT n = 1;
+CYCLE_TURN (n <= 5) {
+    MOSTRAR(n * 3);
+    n = n + 1;
+}
